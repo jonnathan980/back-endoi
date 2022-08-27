@@ -27,6 +27,15 @@ const SQL_BARES_CREATE = `
 		senha TEXT
 		
 	)`;
+	const SQL_Cardabios_CREATE =`
+	 CREATE TABLE Cardabios (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		nome TEXT,
+		descricao TEXT,
+		preco TEXT,
+		url TEXT
+		
+	)`;
 
 const database = new sqlite3.Database(DBSOURCE, (err) => {
 	if (err) {
@@ -53,6 +62,13 @@ const database = new sqlite3.Database(DBSOURCE, (err) => {
 				console.error(err);
 			} else {
 				console.log('Tabela usuarios criada com sucesso.')
+			}
+		})
+		database.run(SQL_Cardabios_CREATE, (err) => {
+			if (err) {
+				console.error(err);
+			} else {
+				console.log('Tabela Cardabios criada com sucesso.')
 			}
 		})
 	}

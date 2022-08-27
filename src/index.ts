@@ -3,6 +3,7 @@ import cors from 'cors'
 import itensRouter from './routers/itens-router'
 import BaresRouter from './routers/bares-router'
 import UsuarioRouter from './routers/usuario-router'
+import CardabiosRouter from './routers/cardabios-router'
 
 // Porta do servidor
 const PORT = process.env.PORT || 4000
@@ -31,6 +32,7 @@ app.use(cors({
 app.use('/api', itensRouter)
 app.use('/', BaresRouter)
 app.use('/', UsuarioRouter)
+app.use('/', CardabiosRouter)
 
 
 
