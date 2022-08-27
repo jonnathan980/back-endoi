@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import itensRouter from './routers/itens-router'
-
 import BaresRouter from './routers/bares-router'
 import UsuarioRouter from './routers/usuario-router'
 
@@ -30,8 +29,8 @@ app.use(cors({
 
 // Rotas
 app.use('/api', itensRouter)
-app.use('/api', BaresRouter)
-app.use('/api', UsuarioRouter)
+app.use('/', BaresRouter)
+app.use('/', UsuarioRouter)
 
 
 

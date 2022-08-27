@@ -8,7 +8,7 @@ UsuarioRouter.post('/usuario', (req, res) => {
 	const item: usuario = req.body
 	UsuarioRepository.criar(item, (id) => {
         if (id) {
-            res.status(201).location(`/itens/${id}`).send()
+            res.status(201).location(`/usuario/${id}`).send()
         } else {
             res.status(400).send()
         }

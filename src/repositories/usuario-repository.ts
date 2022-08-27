@@ -3,35 +3,36 @@ import database from "./database"
 
 const UsuarioRepository = {
 	criar: (item: usuario, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO usuario (id,nome,Sobrenome,Emaill,Senha,) VALUES (?,?,?,?,?)'
-		const params = [item.id,item.nome,item.Sobrenome,item.Senha,item.Emaill]
-		database.run(sql, params, function(_err) {
+		const sql = 'INSERT INTO usuarios (nome,sobrenome,email,senha) VALUES (?,?,?,?)'
+		const params = [item.nome,item.sobrenome,item.senha,item.email]
+		database.run(sql, params, function(err) {
+			console.error(err)
 			callback(this?.lastID)
 		})
 	},
 
 	lerTodos: (callback: (item: usuario[]) => void) => {
-		const sql = 'SELECT * FROM usuario'
+		const sql = 'SELECT * FROM usuarios'
 		const params: any[] = []
 		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
 	ler: (id: number, callback: (item?: usuario) => void) => {
-		const sql = 'SELECT * FROM usuario WHERE id = ?'
+		const sql = 'SELECT * FROM usuarios WHERE id = ?'
 		const params = [id]
 		database.get(sql, params, (_err, row) => callback(row))
 	},
 
 	atualizar: (id: number, item: usuario, callback: (notFound: boolean) => void) => {
-		const sql = 'UPDATE usuario SET nome = ?, descricao = ?,endereco = ?,imagemUrl = ?, WHERE id = ?'
-		const params = [item.nome,item.Sobrenome,item.Senha,item.Emaill, id]
+		const sql = 'UPDATE usuarios SET nome = ?, sobrenome = ?,senha = ?,email = ? WHERE id = ?'
+		const params = [item.nome,item.sobrenome,item.senha,item.email, id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})
 	},
 
 	apagar: (id: number, callback: (notFound: boolean) => void) => {
-		const sql = 'DELETE FROM usuario WHERE id = ?'
+		const sql = 'DELETE FROM usuarios WHERE id = ?'
 		const params = [id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
