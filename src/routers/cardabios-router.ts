@@ -1,12 +1,12 @@
 import express from "express"
 import Cardabio01 from "../models/cardabio"
-import Cardabio01Repository from "../repositories/cardabio"
+import CardabioRepository from "../repositories/cardabio-repository"
 
 const CardabiosRouter = express.Router()
 
 CardabiosRouter.post('/CardabiosRouter', (req, res) => {
 	const item: Cardabio01 = req.body
-	Cardabio01Repository.criar(item, (id) => {
+	CardabioRepository.criar(item, (id) => {
         if (id) {
             res.status(201).location(`/CardabiosRouter/${id}`).send()
         } else {
@@ -16,12 +16,12 @@ CardabiosRouter.post('/CardabiosRouter', (req, res) => {
 })
 
 CardabiosRouter.get('/CardabiosRouter', (req, res) => {
-	Cardabio01Repository.lerTodos((itens) => res.json(itens))
+	CardabioRepository.lerTodos((itens) => res.json(itens))
 })
 
 CardabiosRouter.get('/CardabiosRouter/:id', (req, res) => {
 	const id: number = +req.params.id
-	Cardabio01Repository.ler(id, (item) => {
+	CardabioRepository.ler(id, (item) => {
 		if (item) {
 			res.json(item)
 		} else {
@@ -32,7 +32,7 @@ CardabiosRouter.get('/CardabiosRouter/:id', (req, res) => {
 
 CardabiosRouter.put('/CardabiosRouter/:id', (req, res) => {
 	const id: number = +req.params.id
-	Cardabio01Repository.atualizar(id, req.body, (notFound) => {
+	CardabioRepository.atualizar(id, req.body, (notFound) => {
 		if (notFound) {
 			res.status(404).send()
 		} else {
@@ -43,7 +43,7 @@ CardabiosRouter.put('/CardabiosRouter/:id', (req, res) => {
 
 CardabiosRouter.delete('/CardabiosRouter/:id', (req, res) => {
 	const id: number = +req.params.id
-	Cardabio01Repository.apagar(id, (notFound) => {
+	CardabioRepository.apagar(id, (notFound) => {
         if (notFound) {
             res.status(404).send()
         } else {

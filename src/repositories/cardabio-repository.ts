@@ -1,7 +1,7 @@
 import Cardabio01 from "../models/cardabio"
 import database from "./database"
 
-const Cardabio01Repository = {
+const CardabioRepository = {
 	criar: (item: Cardabio01, callback: (id?: number) => void) => {
 		const sql = 'INSERT INTO Cardabios (id,title,nome,descricao,preco,url) VALUES (?,?,?,?,?,?)'
 		const params = [item.id,item.title,item.nome,item.descricao,item.preco,item.url]
@@ -39,4 +39,4 @@ const Cardabio01Repository = {
 	},
 }
 
-export default Cardabio01Repository
+export default CardabioRepository

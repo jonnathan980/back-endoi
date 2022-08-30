@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // Cors
 app.use(cors({
-	origin: ['http://localhost:4000']
+	origin: '*'
 }))
 
 // Rotas
