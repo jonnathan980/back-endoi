@@ -4,6 +4,7 @@ import itensRouter from './routers/itens-router'
 import BaresRouter from './routers/bares-router'
 import UsuarioRouter from './routers/usuario-router'
 import CardabiosRouter from './routers/cardabios-router'
+import AudenticacoesRouter from './routers/audenticacoes-router'
 
 // Porta do servidor
 const PORT = process.env.PORT || 4000
@@ -33,7 +34,7 @@ app.use('/api', itensRouter)
 app.use('/', BaresRouter)
 app.use('/', UsuarioRouter)
 app.use('/', CardabiosRouter)
-
+app.use('/', AudenticacoesRouter)
 
 
 // Resposta padrão para quaisquer outras requisições:
