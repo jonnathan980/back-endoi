@@ -1,4 +1,4 @@
-type Cardabio01 ={
+type Cardabios ={
     id: number
     title:string
     nome: string
@@ -7,4 +7,4 @@ type Cardabio01 ={
     url:string
  }
 
- export default Cardabio01
+ export default Cardabios

@@ -36,6 +36,11 @@ const SQL_BARES_CREATE = `
 		url TEXT
 		
 	)`;
+	const SQL_Mesa_CREATE =`
+	 CREATE TABLE Mesa (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		nome TEXT
+	)`;
 
 const database = new sqlite3.Database(DBSOURCE, (err) => {
 	if (err) {
@@ -69,6 +74,13 @@ const database = new sqlite3.Database(DBSOURCE, (err) => {
 				console.error(err);
 			} else {
 				console.log('Tabela Cardabios criada com sucesso.')
+			}
+		})
+		database.run(SQL_Mesa_CREATE, (err) => {
+			if (err) {
+				console.error(err);
+			} else {
+				console.log('Tabela Mesa criada com sucesso.')
 			}
 		})
 	}

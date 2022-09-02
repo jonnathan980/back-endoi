@@ -8,7 +8,7 @@ BaresRouter.post('/Bares', (req, res) => {
 	const item: Bares = req.body
 	BaresRepository.criar(item, (id) => {
         if (id) {
-            res.status(201).location(`/itens/${id}`).send()
+            res.status(201).location(`/Bares/${id}`).send()
         } else {
             res.status(400).send()
         }
