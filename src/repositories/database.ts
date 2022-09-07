@@ -27,8 +27,8 @@ const SQL_BARES_CREATE = `
 		senha TEXT
 		
 	)`;
-	const SQL_Cardabios_CREATE =`
-	 CREATE TABLE Cardabios (
+	const SQL_Produto_CREATE =`
+	 CREATE TABLE Produto (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome TEXT,
 		descricao TEXT,
@@ -41,6 +41,14 @@ const SQL_BARES_CREATE = `
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome TEXT
 	)`;
+	const SQL_Cardapio_CREATE =`
+	 CREATE TABLE Cardapio (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		nome TEXT,
+		id_bar,
+		produtos? TEXT
+	)`;
+	
 
 const database = new sqlite3.Database(DBSOURCE, (err) => {
 	if (err) {
@@ -69,11 +77,11 @@ const database = new sqlite3.Database(DBSOURCE, (err) => {
 				console.log('Tabela usuarios criada com sucesso.')
 			}
 		})
-		database.run(SQL_Cardabios_CREATE, (err) => {
+		database.run(SQL_Produto_CREATE, (err) => {
 			if (err) {
 				console.error(err);
 			} else {
-				console.log('Tabela Cardabios criada com sucesso.')
+				console.log('Tabela Produto criada com sucesso.')
 			}
 		})
 		database.run(SQL_Mesa_CREATE, (err) => {
@@ -81,6 +89,13 @@ const database = new sqlite3.Database(DBSOURCE, (err) => {
 				console.error(err);
 			} else {
 				console.log('Tabela Mesa criada com sucesso.')
+			}
+		})
+		database.run(SQL_Cardapio_CREATE, (err) => {
+			if (err) {
+				console.error(err);
+			} else {
+				console.log('Tabela Cardapio criada com sucesso.')
 			}
 		})
 	}

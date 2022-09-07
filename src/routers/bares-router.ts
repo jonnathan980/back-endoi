@@ -1,6 +1,8 @@
 import express from "express"
 import Bares from "../models/bares"
 import BaresRepository from "../repositories/bares-repository"
+import CardapioRepository from "../repositories/cardabio-repository"
+import ProdutoRepository from "../repositories/Produto-repository"
 
 const BaresRouter = express.Router()
 
@@ -31,8 +33,17 @@ BaresRouter.get('/Bares/:id', (req, res) => {
 })
 
 BaresRouter.get('/Bares/:id/cardapios', (req, res) => {
+	const id: number = +req.params.id
+	CardapioRepository.ler(id,(item) => {
+		if (item) {
+			ProdutoRepository.lerTodos
+		    res.json(item)
+		} else {
+			res.status(404).send()
+		}
+	})
+})
 	
-}
 
 BaresRouter.put('/Bares/:id', (req, res) => {
 	const id: number = +req.params.id
