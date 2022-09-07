@@ -30,6 +30,10 @@ BaresRouter.get('/Bares/:id', (req, res) => {
 	})
 })
 
+BaresRouter.get('/Bares/:id/cardapios', (req, res) => {
+	
+}
+
 BaresRouter.put('/Bares/:id', (req, res) => {
 	const id: number = +req.params.id
 	BaresRepository.atualizar(id, req.body, (notFound) => {

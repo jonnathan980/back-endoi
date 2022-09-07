@@ -3,9 +3,12 @@ import database from "./database"
 
 const CardabioRepository = {
 	criar: (item: Cardabios, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO Cardabios,(id,title,nome,descricao,preco,url) VALUES (?,?,?,?,?,?)'
-		const params = [item.id,item.title,item.nome,item.descricao,item.preco,item.url]
-		database.run(sql, params, function(_err) {
+		const sql = 'INSERT INTO Cardabios (id,nome,descricao,preco,url) VALUES (?,?,?,?,?)'
+		const params = [item.id,item.nome,item.descricao,item.preco,item.url]
+		database.run(sql, params, function(err) {
+			if(err){
+				console.error(err)
+			}
 			callback(this?.lastID)
 		})
 	},
