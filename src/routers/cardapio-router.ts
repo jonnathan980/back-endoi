@@ -1,6 +1,6 @@
 import express from "express"
 import Cardapio from "../models/Cardapio"
-import CardapioRepository from "../repositories/cardabio-repository"
+import CardapioRepository from "../repositories/cardapio-repository"
 
 const CardapioRouter = express.Router()
 

@@ -1,7 +1,7 @@
 import express from "express"
 import Bares from "../models/bares"
 import BaresRepository from "../repositories/bares-repository"
-import CardapioRepository from "../repositories/cardabio-repository"
+import CardapioRepository from "../repositories/cardapio-repository"
 import ProdutoRepository from "../repositories/Produto-repository"
 
 const BaresRouter = express.Router()
