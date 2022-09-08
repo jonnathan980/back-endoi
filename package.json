@@ -1,13 +1,13 @@
 {
 	"name": "tutorial-rest-api-nodejs-express-sqlite-typescript",
 	"version": "1.0.1",
-	"main": "./public/index.js",
+	"main": "./dist/index.js",
 	"license": "MIT",
 	"scripts": {
 		"dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --exec \"ts-node ./src/index.ts\"",
 		"dev2":"npx nodemon ./src/index.ts",
 		"build": "tsc",
-		"start": "node ./public/index.js"
+		"start": "node ./dist/index.js"
 	},
 	"dependencies": {
 		"@types/cors": "^2.8.12",
