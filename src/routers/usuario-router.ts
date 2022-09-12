@@ -19,6 +19,22 @@ UsuarioRouter.get('/usuario', (req, res) => {
 	UsuarioRepository.lerTodos((itens) => res.json(itens))
 })
 
+UsuarioRouter.get('/usuario/logado', (req, res) => {
+	if (req.headers.token === undefined) {
+		res.status(400).send();
+	} else {
+		const token: string = req.headers.token.toString();
+		const id: number = Number(token);
+		UsuarioRepository.ler(id, (usuario) => {
+			if (usuario === undefined) {
+				res.status(401).send();
+			} else {
+				res.status(200).json(usuario);
+			}
+		});
+	}
+});
+
 UsuarioRouter.get('/usuario/:id', (req, res) => {
 	const id: number = +req.params.id
 	UsuarioRepository.ler(id, (item) => {
