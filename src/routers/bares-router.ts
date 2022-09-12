@@ -1,5 +1,6 @@
 import express from "express"
 import Bares from "../models/bares"
+import Cardapio from "../models/Cardapio"
 import BaresRepository from "../repositories/bares-repository"
 import CardapioRepository from "../repositories/cardapio-repository"
 import ProdutoRepository from "../repositories/Produto-repository"
@@ -33,13 +34,28 @@ BaresRouter.get('/Bares/:id', (req, res) => {
 })
 
 BaresRouter.get('/Bares/:id/cardapios', (req, res) => {
+	
 	const id: number = +req.params.id
-	CardapioRepository.ler(id,(item) => {
-		if (item) {
-			ProdutoRepository.lerTodos
-		    res.json(item)
-		} else {
+	console.log(`get/Bares/${id}/cardapios`)
+	BaresRepository.ler(id, (bar) => {
+		if (bar === undefined) {
+			console.error('notFound')
 			res.status(404).send()
+		}
+		else {
+			CardapioRepository.lerTodosDoBar(id,(cardapios) => {
+				cardapios.forEach((cardapio) => {
+					ProdutoRepository.lerTodosDoCardapio(cardapio.id, (produtos) => {
+						cardapio.produtos = produtos
+					})
+				});
+		
+				if (cardapios) {
+					res.status(200).json(cardapios)
+				} else {
+					res.status(400).send()
+				}
+			})
 		}
 	})
 })

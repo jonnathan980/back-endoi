@@ -18,6 +18,7 @@ const BaresRepository = {
 
 	ler: (id: number, callback: (item?: Bares) => void) => {
 		const sql = 'SELECT * FROM Bares WHERE id = ?'
+		console.log(`SELECT * FROM Bares WHERE id = ${id}`)
 		const params = [id]
 		database.get(sql, params, (_err, row) => callback(row))
 	},

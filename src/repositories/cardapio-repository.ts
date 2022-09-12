@@ -20,10 +20,10 @@ const CardapioRepository = {
 		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
-	ler: (id: number, callback: (item?: Cardapio) => void) => {
-		const sql = 'SELECT * FROM Cardapio WHERE id = ?'
-		const params = [id]
-		database.get(sql, params, (_err, row) => callback(row))
+	lerTodosDoBar: (id_bar: number, callback: (cardapios: Cardapio[]) => void) => {
+		const sql = 'SELECT * FROM Cardapio WHERE id_bar = ?'
+		const params = [id_bar]
+		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
 	atualizar: (id: number, item: Cardapio, callback: (notFound: boolean) => void) => {

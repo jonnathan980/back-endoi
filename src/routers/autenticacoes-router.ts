@@ -1,17 +1,19 @@
 import express from "express";
+import UsuarioRepository from "../repositories/usuario-repository";
 
 const AutenticacoesRouter = express.Router()
 
 AutenticacoesRouter.post('/autenticacao', (req,res) => {
-  if (req.body.email==='admin' && req.body.senha==='admin') {
-    res.status(201).json({
-        token: '1'
-    })
-  }else{
-    res.status(401).send()
-  }
- 
-   
+
+  UsuarioRepository.login(req.body.email, req.body.senha, (usuario) => {
+    if(usuario === undefined){
+      res.status(401).send()
+    } else{
+      res.status(201).json({
+        token: usuario.id.toString()
+      })
+    }
+  })
 }) 
 
 

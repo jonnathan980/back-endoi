@@ -33,8 +33,8 @@ const SQL_BARES_CREATE = `
 		nome TEXT,
 		descricao TEXT,
 		preco TEXT,
-		url TEXT
-		
+		url TEXT,
+		id_cardapio INTEGER
 	)`;
 	const SQL_Mesa_CREATE =`
 	 CREATE TABLE Mesa (
@@ -45,8 +45,7 @@ const SQL_BARES_CREATE = `
 	 CREATE TABLE Cardapio (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome TEXT,
-		id_bar,
-		produtos? TEXT
+		id_bar INTEGER
 	)`;
 	
 

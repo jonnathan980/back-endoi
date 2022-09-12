@@ -20,6 +20,12 @@ const ProdutoRepository = {
 		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
+	lerTodosDoCardapio: (id_cardapio: number, callback: (produtos: Produto[]) => void) => {
+		const sql = 'SELECT * FROM Produto WHERE id_cardapio = ?'
+		const params = [id_cardapio]
+		database.all(sql, params, (_err, rows) => callback(rows))
+	},
+
 	ler: (id: number, callback: (item?: Produto) => void) => {
 		const sql = 'SELECT * FROM Produto WHERE id = ?'
 		const params = [id]

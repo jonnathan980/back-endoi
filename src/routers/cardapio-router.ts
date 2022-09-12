@@ -21,7 +21,7 @@ CardapioRouter.get('/Cardapio', (req, res) => {
 
 CardapioRouter.get('/Cardapio/:id', (req, res) => {
 	const id: number = +req.params.id
-	CardapioRepository.ler(id, (item) => {
+	CardapioRepository.lerTodosDoBar(id, (item) => {
 		if (item) {
 			res.json(item)
 		} else {
