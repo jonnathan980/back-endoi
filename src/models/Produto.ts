@@ -4,5 +4,6 @@ type Produto ={
     descricao: string
     preco:number
     url:string
+    id_cardapio:number
 }
  export default Produto

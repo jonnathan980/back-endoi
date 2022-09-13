@@ -36,7 +36,7 @@ BaresRouter.get('/Bares/:id', (req, res) => {
 BaresRouter.get('/Bares/:id/cardapios', (req, res) => {
 	
 	const id: number = +req.params.id
-	console.log(`get/Bares/${id}/cardapios`)
+	console.log(`GET /Bares/${id}/cardapios`)
 	BaresRepository.ler(id, (bar) => {
 		if (bar === undefined) {
 			console.error('notFound')
@@ -44,17 +44,25 @@ BaresRouter.get('/Bares/:id/cardapios', (req, res) => {
 		}
 		else {
 			CardapioRepository.lerTodosDoBar(id,(cardapios) => {
-				cardapios.forEach((cardapio) => {
+		
+				let numCardapiosParaLerProdutos = cardapios.length;
+				cardapios.forEach(cardapio => {
 					ProdutoRepository.lerTodosDoCardapio(cardapio.id, (produtos) => {
 						cardapio.produtos = produtos
+						numCardapiosParaLerProdutos--
+
+						if (numCardapiosParaLerProdutos <= 0) {
+							if (cardapios) {
+								res.status(200).json(cardapios)
+							} else {
+								res.status(400).send()
+							}
+						}
+
 					})
 				});
 		
-				if (cardapios) {
-					res.status(200).json(cardapios)
-				} else {
-					res.status(400).send()
-				}
+				
 			})
 		}
 	})

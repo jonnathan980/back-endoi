@@ -3,8 +3,8 @@ import database from "./database"
 
 const ProdutoRepository = {
 	criar: (item: Produto, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO Produto (id,nome,descricao,preco,url) VALUES (?,?,?,?,?)'
-		const params = [item.id,item.nome,item.descricao,item.preco,item.url]
+		const sql = 'INSERT INTO Produto (nome,descricao,preco,url,id_cardapio) VALUES (?,?,?,?,?)'
+		const params = [item.nome,item.descricao,item.preco,item.url,item.id_cardapio]
 		database.run(sql, params, function(err) {
 			if(err){
 				console.error(err)

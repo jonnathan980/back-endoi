@@ -3,8 +3,8 @@ import database from "./database"
 
 const CardapioRepository = {
 	criar: (item: Cardapio, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO Cardapio (id,nome,id_bar,produtos) VALUES (?,?,?,?)'
-		const params = [item.id,item.nome,item.id_bar,item.produtos]
+		const sql = 'INSERT INTO Cardapio (id,nome,id_bar) VALUES (?,?,?)'
+		const params = [item.id,item.nome,item.id_bar]
 		database.run(sql, params, function(err) {
 			if(err){
 				console.error(err)
@@ -12,8 +12,11 @@ const CardapioRepository = {
 			callback(this?.lastID)
 		})
 	},
-
-
+	ler:(id: number, callback:(cardapio: Cardapio) => void) => {
+		const sql = 'SELECT * FROM Cardapio WHERE id = ?'
+		const params = [id]
+		database.get(sql,params,(_err, row) => callback(row))
+	},
 	lerTodos: (callback: (item: Cardapio[]) => void) => {
 		const sql = 'SELECT * FROM Cardapio'
 		const params: any[] = []
@@ -27,8 +30,8 @@ const CardapioRepository = {
 	},
 
 	atualizar: (id: number, item: Cardapio, callback: (notFound: boolean) => void) => {
-		const sql = 'UPDATE Cardapio SET  nome = ?,id_bar = ?,produtos = ?, WHERE id = ?'
-		const params = [item.id,item.nome,item.id_bar,item.produtos]
+		const sql = 'UPDATE Cardapio SET  nome = ?,id_bar = ?, WHERE id = ?'
+		const params = [item.nome,item.id_bar,item.produtos,id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})

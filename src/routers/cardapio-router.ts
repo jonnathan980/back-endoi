@@ -1,6 +1,7 @@
 import express from "express"
 import Cardapio from "../models/Cardapio"
 import CardapioRepository from "../repositories/cardapio-repository"
+import ProdutoRepository from "../repositories/Produto-repository"
 
 const CardapioRouter = express.Router()
 
@@ -26,6 +27,19 @@ CardapioRouter.get('/Cardapio/:id', (req, res) => {
 			res.json(item)
 		} else {
 			res.status(404).send()
+		}
+	})
+})
+
+CardapioRouter.get('/Cardapio/:id/Protudos', (req,res) => {
+	const id: number = +req.params.id
+	CardapioRepository.ler(id,(cardapio) => {
+		if(cardapio === undefined){
+			res.status(404).send()
+		}else{
+			ProdutoRepository.lerTodosDoCardapio(id,(produtos) =>{
+				res.status(200).json(produtos)
+			})
 		}
 	})
 })
